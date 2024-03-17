@@ -8,7 +8,7 @@ from utils import DataUtils
 def train_improved(network: Network, X_train: np.ndarray, X_valid: np.ndarray, Y_train: np.ndarray, Y_valid: np.ndarray,
                    criterion: Loss, num_epochs: int, learning_rate: float, patience=5,
                    shuffle=False) -> (np.ndarray, np.ndarray):
-    
+
     """Trains a neural network model using early stopping for better generalization.
 
     This function iteratively trains the network on the training set (`X_train`, `Y_train`)
@@ -42,8 +42,8 @@ def train_improved(network: Network, X_train: np.ndarray, X_valid: np.ndarray, Y
 
     # Main Epoch loop
     for epoch in range(num_epochs):
-        eloss_train = 0.0
-        eloss_valid = 0.0
+        epoch_loss_train = 0.0
+        epoch_loss_valid = 0.0
 
         if shuffle:
             X_train, Y_train = DataUtils.shuffle_data(X_train, Y_train)
@@ -58,7 +58,7 @@ def train_improved(network: Network, X_train: np.ndarray, X_valid: np.ndarray, Y
 
             # Compute the loss according to the loss function
             loss, loss_grad = criterion.calculate(y_true, y_pred)
-            eloss_train += loss
+            epoch_loss_train += loss
 
             # Backpropagation of the loss
             network.backward(loss_grad)
@@ -67,7 +67,7 @@ def train_improved(network: Network, X_train: np.ndarray, X_valid: np.ndarray, Y
             network.optimizer_step(learning_rate)
 
         # Bookkeeping for the loss during training
-        avg_loss_train = eloss_train / len(X_train)
+        avg_loss_train = epoch_loss_train / len(X_train)
         losses_train.append(avg_loss_train)
 
         # Validation
@@ -82,9 +82,9 @@ def train_improved(network: Network, X_train: np.ndarray, X_valid: np.ndarray, Y
 
             # Compute the loss for the validation observation
             loss_valid, loss_valid_grad = criterion.calculate(y_true_valid, y_pred_valid)
-            eloss_valid += loss_valid
+            epoch_loss_valid += loss_valid
 
-        avg_loss_valid = eloss_valid / len(X_valid)
+        avg_loss_valid = epoch_loss_valid / len(X_valid)
         losses_valid.append(avg_loss_valid)
 
         # Early stopping bookkeeping
