@@ -77,7 +77,7 @@ class DataUtils:
     def split_train_test_val(features: np.ndarray, targets: np.ndarray, seed: int = None, test_size: float = 0.15,
                              val_size: float = 0.15) -> (np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray,
                                                          np.ndarray):
-        
+
         """Splits feature and target data into training, validation, and testing sets.
 
         This function shuffles the data before splitting to promote a
@@ -122,3 +122,53 @@ class DataUtils:
         y_train, y_valid, y_test = targets[train_indices], targets[val_indices], targets[test_indices]
 
         return X_train, X_valid, X_test, y_train, y_valid, y_test
+
+    @staticmethod
+    def k_fold_cross_validation(features: np.ndarray, targets: np.ndarray, k: int = 2, seed: int = None) -> (
+            list)[(np.ndarray, np.ndarray, np.ndarray, np.ndarray)]:
+        """Performs k-fold cross-validation on feature and target data.
+
+        This function splits the data into 'k' folds, then iteratively uses one fold as
+        the validation set and the remaining folds as the training set. This allows for
+        more robust model evaluation across different splits of the dataset.
+
+        Args:
+            features (array-like): The feature data.
+            targets (array-like): The corresponding target values.
+            k (int, optional): The number of folds to create. Defaults to 2.
+            seed (int, optional): A random seed for reproducibility. Defaults to None.
+
+        Returns:
+            list: A list of tuples. Each tuple contains:
+                * X_train_fold (array-like):
+                        Features for the training set in the current fold.
+                * X_val_fold (array-like):
+                        Features for the validation set in the current fold.
+                * y_train_fold (array-like):
+                        Targets for the training set in the current fold.
+                * y_val_fold (array-like):
+                        Targets for the validation set in the current fold.
+        """
+        assert k > 0
+
+        if seed is not None:
+            np.random.seed(seed)
+
+        shuffled_indices = np.random.permutation(features.shape[0])
+
+        # Split the shuffled indices into k folds
+        fold_size = len(shuffled_indices) // k
+        folds = [shuffled_indices[i * fold_size: (i + 1) * fold_size] for i in range(k)]
+
+        k_fold_data = []
+        if k > 0:
+            for i in range(k):
+                val_indices = folds[i]
+                train_indices = np.concatenate([fold for j, fold in enumerate(folds) if j != i])
+
+            X_train_fold, X_val_fold = features[train_indices], features[val_indices]
+            y_train_fold, y_val_fold = targets[train_indices], targets[val_indices]
+
+            k_fold_data.append((X_train_fold, X_val_fold, y_train_fold, y_val_fold))
+
+        return k_fold_data
