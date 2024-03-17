@@ -19,13 +19,11 @@ class ModelVisualizer:
 
         fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(8, 6))
 
-        # Plot loss
         ax1.plot(range(1, num_iterations + 1), losses)
         ax1.set_xlabel('Iterations')
         ax1.set_ylabel('Value')
         ax1.set_title(sub_title_1)
 
-        # Plot accuracy
         ax2.plot(range(1, num_iterations + 1), accuracies)
         ax2.set_xlabel('Iterations')
         ax2.set_ylabel('Value')

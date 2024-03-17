@@ -59,10 +59,7 @@ class DataUtils:
         if seed is not None:
             np.random.seed(seed)
 
-        # Calculate the number of samples for the test set
         num_test_samples = int(test_size * features.shape[0])
-
-        # Shuffle the indices of the data
         shuffled_indices = np.random.permutation(features.shape[0])
 
         test_indices = shuffled_indices[:num_test_samples]
@@ -156,7 +153,6 @@ class DataUtils:
 
         shuffled_indices = np.random.permutation(features.shape[0])
 
-        # Split the shuffled indices into k folds
         fold_size = len(shuffled_indices) // k
         folds = [shuffled_indices[i * fold_size: (i + 1) * fold_size] for i in range(k)]
 
@@ -172,3 +168,33 @@ class DataUtils:
             k_fold_data.append((X_train_fold, X_val_fold, y_train_fold, y_val_fold))
 
         return k_fold_data
+
+    @staticmethod
+    def evaluate_accuracy(network, test_data, true_labels):
+
+        """Calculates the accuracy of a trained neural network on a test dataset.
+
+        Accuracy is determined by comparing the network's predicted class labels to the
+        true class labels of the test data.
+
+        Args:
+            network: A trained neural network object.
+            test_data (array-like): The input data to evaluate the network on.
+            true_labels (array-like): The true target labels corresponding to the test data.
+
+        Returns:
+            float: The accuracy of the network on the test set (between 0.0 and 1.0).
+        """
+
+        correct = 0
+        total = 0
+        for x, y in zip(test_data, true_labels):
+            predicted = network.forward(x)
+
+            pred_class = np.argmax(predicted) + 1
+            true_class = np.argmax(y) + 1
+            correct += (pred_class == true_class)
+            total += 1
+
+        accuracy = correct / total
+        return accuracy
