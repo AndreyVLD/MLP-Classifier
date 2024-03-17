@@ -1,4 +1,5 @@
 import numpy as np
+from models.network import Network
 
 
 class DataUtils:
@@ -170,7 +171,7 @@ class DataUtils:
         return k_fold_data
 
     @staticmethod
-    def evaluate_accuracy(network, test_data, true_labels):
+    def evaluate_accuracy(network: Network, test_data: np.ndarray, true_labels: np.ndarray):
 
         """Calculates the accuracy of a trained neural network on a test dataset.
 
@@ -198,3 +199,28 @@ class DataUtils:
 
         accuracy = correct / total
         return accuracy
+
+    @staticmethod
+    def confusion_matrix(y_true: np.ndarray, y_pred: np.ndarray, num_classes: int = 7) -> np.ndarray:
+        """Calculates the confusion matrix for evaluating classification performance.
+
+        Args:
+            y_true (array-like): The true class labels.
+            y_pred (array-like): The predicted class labels.
+            num_classes (int, optional): The total number of classes. Defaults to 7.
+
+        Returns:
+            numpy.ndarray: A square matrix where rows represent true labels and
+                columns represent predicted labels. Each element counts the number of
+                instances where a true label was predicted as a certain class.
+        """
+
+        matrix = np.zeros((num_classes, num_classes), dtype=np.int32)
+
+        for true_label, pred_label in zip(y_true, y_pred):
+            true_lb = np.argmax(true_label) + 1
+            matrix[true_lb - 1][pred_label - 1] += 1
+
+        return matrix
+
+
