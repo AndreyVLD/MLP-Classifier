@@ -2,7 +2,7 @@ import numpy as np
 
 
 class Linear:
-    def __init__(self, in_features, out_features, init_approach):
+    def __init__(self, in_features: int, out_features: int, init_approach='he_normal_init'):
         """ Randomly initialize the weights and biases.
 
         Args:
@@ -19,7 +19,7 @@ class Linear:
         self.weight_grad = None
         self.bias_grad = None
 
-    def forward(self, x):
+    def forward(self, x: np.ndarray) -> np.ndarray:
         """ Perform the forward pass of a linear layer.
         Store (cache) the input so it can be used in the backward pass.
 
@@ -34,7 +34,7 @@ class Linear:
 
         return y
 
-    def backward(self, upstream_gradient):
+    def backward(self, upstream_gradient: np.ndarray) -> np.ndarray:
         """ Perform the backward pass of a linear layer.
 
         Args:
@@ -46,9 +46,10 @@ class Linear:
 
         dx = self.weight.T @ upstream_gradient
 
-        du = upstream_gradient[np.newaxis].T
-        sc = self.cache[np.newaxis]
-        self.weight_grad = du @ sc
+        grad = upstream_gradient[np.newaxis].T
+        s_cache = self.cache[np.newaxis]
+
+        self.weight_grad = grad @ s_cache
         self.bias_grad = upstream_gradient
 
         return dx
