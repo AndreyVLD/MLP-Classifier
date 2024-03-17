@@ -1,5 +1,5 @@
 import numpy as np
-from initializers import *
+from src.models.initializers import *
 
 INITIALIZERS = {
     'he_normal_init': he_normal_init,

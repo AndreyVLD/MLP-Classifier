@@ -1,5 +1,5 @@
 import numpy as np
-from models.network import Network
+from src.models.network import Network
 
 
 class DataUtils:
