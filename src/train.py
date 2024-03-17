@@ -5,10 +5,10 @@ from models.loss import Loss
 from utils import DataUtils
 
 
-def train_improved(network: Network, X_train: np.ndarray, X_valid: np.ndarray, Y_train: np.ndarray, Y_valid: np.ndarray,
-                   criterion: Loss, num_epochs: int, learning_rate: float, patience=5,
-                   shuffle=False) -> (np.ndarray, np.ndarray):
-
+def train_model(network: Network, X_train: np.ndarray, X_valid: np.ndarray, Y_train: np.ndarray, Y_valid: np.ndarray,
+                criterion: Loss, num_epochs: int, learning_rate: float, patience=5, shuffle=False) -> (
+                np.ndarray, np.ndarray):
+    
     """Trains a neural network model using early stopping for better generalization.
 
     This function iteratively trains the network on the training set (`X_train`, `Y_train`)
