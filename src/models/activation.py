@@ -1,11 +1,13 @@
 import numpy as np
+from abc import ABC, abstractmethod
 
 
 # Abstract class
-class Activation:
+class Activation(ABC):
     def __init__(self):
         self.cache = None
 
+    @abstractmethod
     def forward(self, x: np.ndarray):
         """ Perform a forward pass of your activation function.
         Store (cache) the output so it can be used in the backward pass.
@@ -18,6 +20,7 @@ class Activation:
 
         pass
 
+    @abstractmethod
     def backward(self, upstream_gradient: np.ndarray):
         """ Perform a backward pass of the activation function.
         Args:

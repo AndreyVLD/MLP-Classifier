@@ -38,7 +38,7 @@ def he_uniform_init(shape: (int, int)) -> np.ndarray:
     return np.random.uniform(-limit, limit, shape)
 
 
-def orthogonal_init(shape: (int,int)) -> np.ndarray:
+def orthogonal_init(shape: (int, int)) -> np.ndarray:
     random_matrix = np.random.randn(*shape)
     U, _, Vt = np.linalg.svd(random_matrix, full_matrices=False)
     if shape[0] > shape[1]:
