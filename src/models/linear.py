@@ -1,4 +1,16 @@
 import numpy as np
+from initializers import *
+
+INITIALIZERS = {
+    'he_normal_init': he_normal_init,
+    'random_init': random_init,
+    'uniform_init': uniform_init,
+    'lecun_normal_init': lecun_normal_init,
+    'xavier_normal_init': xavier_normal_init,
+    'xavier_uniform_init': xavier_uniform_init,
+    'he_uniform_init': he_uniform_init,
+    'orthogonal_init': orthogonal_init
+}
 
 
 class Linear:
@@ -9,10 +21,10 @@ class Linear:
             in_features: number of input features.
             out_features: number of output features.
         """
-
-        self.weight = init_approach((out_features, in_features))
+        self.init = INITIALIZERS.get(init_approach, he_normal_init)
+        self.weight = self.init((out_features, in_features))
         self.bias = np.zeros(out_features)
-        self.init = init_approach
+
         self.shape = (out_features, in_features)
 
         self.cache = None
