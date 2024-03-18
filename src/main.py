@@ -23,7 +23,7 @@ def main():
                                              Y_valid, CategoricalCrossEntropy(), 40, 0.01, patience=8)
 
     ModelVisualizer.plot_results(losses_train, losses_valid, 'Train Loss',
-                                 'Validation Loss', "Overfitting Plot")
+                                 'Validation Loss', 'Overfit Plot')
 
     print('Accuracy on the test data', DataUtils.evaluate_accuracy(net, X_test, Y_test))
 

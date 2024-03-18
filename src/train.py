@@ -1,5 +1,3 @@
-from typing import Tuple, List
-
 import numpy as np
 
 from models.network import Network

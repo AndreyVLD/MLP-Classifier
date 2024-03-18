@@ -1,4 +1,3 @@
-import numpy as np
 from src.models.initializers import *
 
 INITIALIZERS = {
