@@ -2,16 +2,16 @@ import numpy as np
 
 from train import train_model
 from utils import DataUtils
-from src.models.linear import Linear
-from src.models.activation import LeakyReLU, SoftMax
-from src.models.network import Network
-from src.models.loss import CategoricalCrossEntropy
+from models.linear import Linear
+from models.activation import LeakyReLU, SoftMax
+from models.network import Network
+from models.loss import CategoricalCrossEntropy
 from visualization import ModelVisualizer
 
 
 def main():
-    features = np.genfromtxt("../data/features.txt", delimiter=",")
-    targets = DataUtils.to_one_hot(np.genfromtxt("../data/targets.txt", delimiter=","))
+    features = np.genfromtxt("data/features.txt", delimiter=",")
+    targets = DataUtils.to_one_hot(np.genfromtxt("data/targets.txt", delimiter=","))
 
     X_train, X_valid, X_test, Y_train, Y_valid, Y_test = DataUtils.split_train_test_val(features, targets, seed=42)
 

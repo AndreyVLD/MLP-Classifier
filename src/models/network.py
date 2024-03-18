@@ -1,6 +1,5 @@
 import numpy as np
-
-from src.models.linear import Linear
+from .linear import Linear
 
 
 class Network:

@@ -1,4 +1,4 @@
-from src.models.initializers import *
+from .initializers import *
 
 INITIALIZERS = {
     'he_normal_init': he_normal_init,
