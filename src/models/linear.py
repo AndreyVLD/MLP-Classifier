@@ -22,6 +22,7 @@ class Linear:
             out_features: number of output features.
         """
         self.init = INITIALIZERS.get(init_approach, he_normal_init)
+
         self.weight = self.init((out_features, in_features))
         self.bias = np.zeros(out_features)
 

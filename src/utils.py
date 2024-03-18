@@ -18,7 +18,7 @@ class DataUtils:
         return inputs[permutation], labels[permutation]
 
     @staticmethod
-    def to_one_hot(labels: list) -> np.ndarray:
+    def to_one_hot(labels: np.ndarray) -> np.ndarray:
         """Converts a list or array of categorical labels into one-hot encoded format.
 
         Args:
@@ -171,7 +171,7 @@ class DataUtils:
         return k_fold_data
 
     @staticmethod
-    def evaluate_accuracy(network: Network, test_data: np.ndarray, true_labels: np.ndarray):
+    def evaluate_accuracy(network: Network, test_data: np.ndarray, true_labels: np.ndarray) -> float:
 
         """Calculates the accuracy of a trained neural network on a test dataset.
 

@@ -1,4 +1,5 @@
 import numpy as np
+
 from src.models.linear import Linear
 
 
@@ -34,13 +35,12 @@ class Network:
             upstream_gradient = layer.backward(upstream_gradient)
         return upstream_gradient
 
-    def optimizer_step(self, lr: float):
+    def optimizer_step(self, lr):
         """ Update the weight and bias parameters of each layer.
 
         Args:
             lr: learning rate.
         """
-
         # We iterate through all layers and update the weights and biases
         for layer in self.layers:
             if isinstance(layer, Linear):
@@ -48,7 +48,6 @@ class Network:
                 layer.weight -= lr * layer.weight_grad
                 layer.bias -= lr * layer.bias_grad
 
-                # Reset the gradients
                 layer.weight_grad = None
                 layer.bias_grad = None
 

@@ -1,3 +1,5 @@
+from typing import Tuple, List
+
 import numpy as np
 
 from models.network import Network
@@ -6,9 +8,8 @@ from utils import DataUtils
 
 
 def train_model(network: Network, X_train: np.ndarray, X_valid: np.ndarray, Y_train: np.ndarray, Y_valid: np.ndarray,
-                criterion: Loss, num_epochs: int, learning_rate: float, patience=5, shuffle=False) -> (
-                np.ndarray, np.ndarray):
-
+                criterion: Loss, num_epochs: int, learning_rate: float, patience: int = 5, shuffle: bool = False) -> \
+        tuple[list[float], list[float]]:
     """Trains a neural network model using early stopping for better generalization.
 
     This function iteratively trains the network on the training set (`X_train`, `Y_train`)
@@ -45,6 +46,7 @@ def train_model(network: Network, X_train: np.ndarray, X_valid: np.ndarray, Y_tr
         epoch_loss_train = 0.0
         epoch_loss_valid = 0.0
 
+        print('Epoch', epoch+1)
         if shuffle:
             X_train, Y_train = DataUtils.shuffle_data(X_train, Y_train)
 
