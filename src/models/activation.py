@@ -34,7 +34,7 @@ class Activation(ABC):
 
 
 class LeakyReLU(Activation):
-    def __init__(self, c):
+    def __init__(self, c: int):
         super().__init__()
         self.c = c
 

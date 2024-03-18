@@ -5,7 +5,7 @@ from models.network import Network
 class DataUtils:
 
     @staticmethod
-    def shuffle_data(inputs: np.ndarray, labels: np.ndarray) -> (np.ndarray, np.ndarray):
+    def shuffle_data(inputs: np.ndarray, labels: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
         """Shuffles the inputs and labels arrays in unison, maintaining correspondence.
 
         Args:
@@ -35,8 +35,8 @@ class DataUtils:
         return one_hot_labels
 
     @staticmethod
-    def split_train_test(features: np.ndarray, targets: np.ndarray, seed: int = None, test_size: float = 0.2) -> (
-            np.ndarray, np.ndarray, np.ndarray, np.ndarray):
+    def split_train_test(features: np.ndarray, targets: np.ndarray, seed: int = None, test_size: float = 0.2) -> tuple[
+        np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
         """Splits feature and target data into training and testing sets.
 
         This function shuffles the data before splitting to ensure a more representative
@@ -73,8 +73,8 @@ class DataUtils:
 
     @staticmethod
     def split_train_test_val(features: np.ndarray, targets: np.ndarray, seed: int = None, test_size: float = 0.15,
-                             val_size: float = 0.15) -> (np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray,
-                                                         np.ndarray):
+                             val_size: float = 0.15) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray,
+                                                              np.ndarray, np.ndarray]:
 
         """Splits feature and target data into training, validation, and testing sets.
 

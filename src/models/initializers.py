@@ -12,7 +12,7 @@ def random_init(shape: (int, int)) -> np.ndarray:
     return np.random.randn(*shape)
 
 
-def uniform_init(shape: (int, int)) -> np.ndarray:
+def uniform_init(shape: tuple[int, int]) -> np.ndarray:
     return np.random.uniform(-0.1, 0.1, shape)
 
 

@@ -38,7 +38,7 @@ class ModelVisualizer:
         plt.show()
 
     @staticmethod
-    def plot_confusion_matrix(matrix: np.ndarray, num_classes: np.ndarray = 7):
+    def plot_confusion_matrix(matrix: np.ndarray, num_classes: int = 7):
         """Visualizes a confusion matrix using a heatmap.
 
         Args:
