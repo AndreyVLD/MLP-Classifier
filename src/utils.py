@@ -222,4 +222,3 @@ class DataUtils:
             matrix[true_lb - 1][pred_label - 1] += 1
 
         return matrix
-
