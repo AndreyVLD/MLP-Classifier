@@ -12,7 +12,6 @@ from visualization import ModelVisualizer
 def confusion_matrix(net, X_test, Y_test):
     test_pred = DataUtils.get_predictions(net, X_test)
     conf_matrix = DataUtils.confusion_matrix(Y_test, test_pred, num_classes=7)
-    print(conf_matrix)
     ModelVisualizer.plot_confusion_matrix(conf_matrix)
 
 
