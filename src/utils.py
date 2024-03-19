@@ -222,3 +222,23 @@ class DataUtils:
             matrix[true_lb - 1][pred_label - 1] += 1
 
         return matrix
+
+    @staticmethod
+    def get_predictions(network, test_data) -> np.ndarray:
+        """Generates class predictions for a set of test data using
+           a trained neural network.
+
+        Args:
+            network: A trained neural network object.
+            test_data (array-like): The input data to generate predictions for.
+
+        Returns:
+            list: A list of predicted class labels (integers).
+        """
+
+        predictions = []
+        for x in test_data:
+            predicted = network.forward(x)
+            pred_class = np.argmax(predicted) + 1
+            predictions.append(pred_class)
+        return np.array(predictions)

@@ -9,6 +9,13 @@ from models.loss import CategoricalCrossEntropy
 from visualization import ModelVisualizer
 
 
+def confusion_matrix(net, X_test, Y_test):
+    test_pred = DataUtils.get_predictions(net, X_test)
+    conf_matrix = DataUtils.confusion_matrix(Y_test, test_pred, num_classes=7)
+    print(conf_matrix)
+    ModelVisualizer.plot_confusion_matrix(conf_matrix)
+
+
 def main():
     features = np.genfromtxt("data/features.txt", delimiter=",")
     targets = DataUtils.to_one_hot(np.genfromtxt("data/targets.txt", delimiter=","))
@@ -26,6 +33,7 @@ def main():
                                  'Validation Loss', 'Overfit Plot')
 
     print('Accuracy on the test data', DataUtils.evaluate_accuracy(net, X_test, Y_test))
+    confusion_matrix(net, X_test, Y_test)
 
 
 if __name__ == '__main__':

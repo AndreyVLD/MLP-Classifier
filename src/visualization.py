@@ -46,7 +46,7 @@ class ModelVisualizer:
             :param num_classes: Number of classes in the matrix
         """
 
-        classes = list(str(range(num_classes)))
+        classes = list(str (x) for x in range(num_classes))
         plt.imshow(matrix, interpolation='nearest', cmap=plt.cm.Blues)
         plt.title('Confusion matrix')
         plt.colorbar()
