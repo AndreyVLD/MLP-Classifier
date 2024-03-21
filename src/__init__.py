@@ -7,9 +7,11 @@ from models.activation import LeakyReLU, SoftMax
 from models.network import Network
 from models.loss import CategoricalCrossEntropy
 from visualization import ModelVisualizer
+from models.torch_model import MLP
 
 
 def confusion_matrix(net, X_test, Y_test):
+    """ Plot the confusion matrix for the test data."""
     test_pred = DataUtils.get_predictions(net, X_test)
     conf_matrix = DataUtils.confusion_matrix(Y_test, test_pred, num_classes=7)
     ModelVisualizer.plot_confusion_matrix(conf_matrix)
@@ -33,6 +35,11 @@ def main():
 
     print('Accuracy on the test data', DataUtils.evaluate_accuracy(net, X_test, Y_test))
     confusion_matrix(net, X_test, Y_test)
+
+    print('PyTorch Model')
+    m = MLP()
+    m.train(features, targets)
+    print('PyTorch Accuracy:', m.eval_accuracy())
 
 
 if __name__ == '__main__':
