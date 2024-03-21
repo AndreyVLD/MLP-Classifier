@@ -18,6 +18,7 @@ def confusion_matrix(net, X_test, Y_test):
 
 
 def main():
+    print('My Model')
     features = np.genfromtxt("data/features.txt", delimiter=",")
     targets = DataUtils.to_one_hot(np.genfromtxt("data/targets.txt", delimiter=","))
 
